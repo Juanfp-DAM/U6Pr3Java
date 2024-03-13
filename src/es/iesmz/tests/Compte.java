@@ -8,10 +8,10 @@ public class Compte {
     private String titular;
 
     //TODO CONSTRUCTOR
-    public Compte(String iban, String titular){
+    /*public Compte(String iban, String titular){
         compruebaIban(iban);
         this.titular=titular;
-    }
+    }*/
 
     public boolean compruebaIban(String ibanIntroducido){
         BigInteger DigitCCCBigInteger, Div97, Resta98, ResultDiv, ResultResta98;
