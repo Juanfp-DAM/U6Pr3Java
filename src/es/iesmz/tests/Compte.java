@@ -35,16 +35,24 @@ public class Compte {
         return false;
     }
 
-    public String generaIBAN(String entidad, String oficina, String dc, String cuenta){
-        String creaIban=entidad+oficina+dc+cuenta+"142800";
-        BigInteger BigCreaIban, DivIban97, Resta98, ResultadoDiv, ResultResta98;
-        BigCreaIban=new BigInteger(creaIban);//Se convierte string a BigInt
-        DivIban97=BigInteger.valueOf(97);//Se le asigna el valor 97
-        ResultadoDiv=BigCreaIban.remainder(DivIban97);
-        Resta98=BigInteger.valueOf(98);//Se le asigna el valor 98
-        ResultResta98=Resta98.subtract(ResultadoDiv);
-        String ibanFinal="ES"+ResultResta98+creaIban;
-        return ibanFinal;
+    public String generaIBAN(String entidad, String oficina, String dc, String cuenta) {
+        try {
+            String unificaDatos = entidad + oficina + dc + cuenta;
+            String creandoIban = entidad + oficina + dc + cuenta + "142800";
+            BigInteger BigCreaIban, DivIban97, Resta98, ResultadoDiv, ResultResta98;
+            BigCreaIban = new BigInteger(creandoIban);//Se convierte string a BigInt
+            DivIban97 = BigInteger.valueOf(97);//Se le asigna el valor 97
+            ResultadoDiv = BigCreaIban.remainder(DivIban97);
+            Resta98 = BigInteger.valueOf(98);//Se le asigna el valor 98
+            ResultResta98 = Resta98.subtract(ResultadoDiv);
+            String ibanFinal = "ES" + ResultResta98 + unificaDatos;
+            if(!ibanFinal.matches("^[E][S][0-9]{22}$")){
+                return null;
+            }
+            return ibanFinal;
+        }catch(NumberFormatException e){
+            return null;
+        }
     }
 
 
